@@ -15,7 +15,11 @@ import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
 
 import css from './NotePage.module.css';
 
-const NotesClient = () => {
+type NotesClientProps = {
+  tag?: string;
+};
+
+const NotesClient = ({ tag }: NotesClientProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,9 +35,9 @@ const NotesClient = () => {
   const [debouncedSearchQuery] = useDebounce(searchQuery, 500);
 
   const { data, isFetching, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ['notes', currentPage, debouncedSearchQuery],
+    queryKey: ['notes', currentPage, debouncedSearchQuery, tag],
     queryFn: () =>
-      fetchNotes({ page: currentPage, search: debouncedSearchQuery }),
+      fetchNotes({ page: currentPage, search: debouncedSearchQuery, tag }),
     refetchOnMount: false,
     placeholderData: keepPreviousData,
   });
