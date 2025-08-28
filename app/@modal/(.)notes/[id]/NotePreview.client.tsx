@@ -3,16 +3,17 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { fetchNoteById } from '@/lib/api';
 import Modal from '@/components/Modal/Modal';
 
 import css from './NotePreview.module.css';
 
-const NotePreviewClient = () => {
-  const { id } = useParams<{ id: string }>();
+interface NotePreviewClientProps {
+  id: string;
+}
 
+const NotePreviewClient = ({ id }: NotePreviewClientProps) => {
   const {
     data: note,
     isLoading,
@@ -39,7 +40,9 @@ const NotePreviewClient = () => {
   return (
     <Modal onClose={onClose}>
       <div>
-        <button className={css.backBtn} onClick={onClose}>Back</button>
+        <button className={css.backBtn} onClick={onClose}>
+          Back
+        </button>
         <div className={css.container}>
           <div className={css.item}>
             <div className={css.header}>
