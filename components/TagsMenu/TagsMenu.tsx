@@ -4,16 +4,11 @@ import { useState } from 'react';
 import css from './TagsMenu.module.css';
 import Link from 'next/link';
 
-interface TagsMenuProps {
-  tags: string[];
-}
-
-const TagsMenu = ({ tags = [] }: TagsMenuProps) => {
+const TagsMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  // Ensure tags are unique
-  const uniqueTags = Array.from(new Set(tags));
+  const Tags = ['Work', 'Personal', 'Meeting', 'Shopping', 'Todo'];
 
   return (
     <div className={css.menuContainer}>
@@ -24,14 +19,14 @@ const TagsMenu = ({ tags = [] }: TagsMenuProps) => {
         <ul className={css.menuList}>
           <li className={css.menuItem}>
             <Link
-              href={`/notes/filter/all`}
+              href={`/notes/filter/All`}
               onClick={toggle}
               className={css.menuLink}
             >
               All
             </Link>
           </li>
-          {uniqueTags.map(tag => (
+          {Tags.map(tag => (
             <li key={tag} className={css.menuItem}>
               <Link
                 href={`/notes/filter/${tag}`}

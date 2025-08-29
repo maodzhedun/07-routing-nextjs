@@ -13,10 +13,9 @@ type Props = {
 };
 
 const NotesPage = async ({ params }: Props) => {
-
   const { slug } = await params;
 
-  const tag = slug[0] === 'all' ? undefined : slug[0];
+  const tag = slug[0] === 'All' ? undefined : slug[0];
   // Fetch notes from API
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
